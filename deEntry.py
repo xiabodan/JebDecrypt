@@ -88,7 +88,9 @@ class JEB2AutoRename(Runnable):
 			self.renameElementIfNeed(part, cstbuilder, elements)		
 		subElements = elements.getSubElements()
 		for subElement in subElements:
-			self.searchMatchFun(subElement, subElement, cstbuilder)
+			if isinstance(subElement, IJavaClass) or isinstance(subElement, IJavaField) or isinstance(subElement, IJavaMethod):
+				continue
+			self.searchMatchFun(elements, subElement, cstbuilder)
 
 	def renameElementIfNeed(self, part, cstbuilder, element):
 		ret = False
